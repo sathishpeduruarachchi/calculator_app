@@ -60,7 +60,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                 Column(
                   children: [
                     calculatorButton(buttonName: "m-"),
-                    calculatorButton(buttonName: "/"),
+                    calculatorButton(buttonName: "/", isGreenButton: true),
                     calculatorButton(buttonName: "9"),
                     calculatorButton(buttonName: "6"),
                     calculatorButton(buttonName: "3"),
@@ -70,11 +70,11 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                 Column(
                   children: [
                     calculatorButton(buttonName: "mr"),
-                    calculatorButton(buttonName: "*"),
-                    calculatorButton(buttonName: "-"),
-                    calculatorButton(buttonName: "+"),
-                    calculatorButton(buttonName: "="),
-                   // calculatorButton(buttonName: "%"),
+                    calculatorButton(buttonName: "*", isGreenButton: true),
+                    calculatorButton(buttonName: "-", isGreenButton: true),
+                    calculatorButton(buttonName: "+", isGreenButton: true),
+                    calculatorButton(buttonName: "=", isGreenButton: true),
+                    // calculatorButton(buttonName: "%"),
                   ],
                 ),
               ],
@@ -85,20 +85,22 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
     );
   }
 
-  Widget calculatorButton({required String buttonName}) {
+  Widget calculatorButton(
+      {required String buttonName, bool isGreenButton = false}) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
         height: 50,
         width: 50,
         decoration: BoxDecoration(
-          color: Colors.grey,
+          color: isGreenButton? Colors.green : Colors.grey,
           borderRadius: BorderRadius.circular(6),
         ),
-        child:  Center(
+        child: Center(
           child: Text(
             buttonName,
-            style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            style: const TextStyle(
+                color: Colors.white, fontWeight: FontWeight.bold),
           ),
         ),
       ),
