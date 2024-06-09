@@ -19,7 +19,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             const SizedBox(
-              height: 170,
+              height: 200,
             ),
             const Text(
               "125*20",
@@ -39,35 +39,67 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
               children: [
                 Column(
                   children: [
-                    Container(
-                      decoration: const BoxDecoration(color: Colors.green),
-                      child: const Text("mc"),
-                    ),
-                    Container(
-                      decoration: const BoxDecoration(color: Colors.green),
-                      child: const Text("mc"),
-                    ),
-                    Container(
-                      decoration: const BoxDecoration(color: Colors.green),
-                      child: const Text("mc"),
-                    ),
-                    Container(
-                      decoration: const BoxDecoration(color: Colors.green),
-                      child: const Text("mc"),
-                    ),
-                    Container(
-                      decoration: const BoxDecoration(color: Colors.green),
-                      child: const Text("mc"),
-                    ),
-                    Container(
-                      decoration: const BoxDecoration(color: Colors.green),
-                      child: const Text("mc"),
-                    ),
+                    calculatorButton(buttonName: "mc"),
+                    calculatorButton(buttonName: "c"),
+                    calculatorButton(buttonName: "7"),
+                    calculatorButton(buttonName: "4"),
+                    calculatorButton(buttonName: "1"),
+                    calculatorButton(buttonName: "%"),
                   ],
-                )
+                ),
+                Column(
+                  children: [
+                    calculatorButton(buttonName: "m+"),
+                    calculatorButton(buttonName: "x"),
+                    calculatorButton(buttonName: "8"),
+                    calculatorButton(buttonName: "5"),
+                    calculatorButton(buttonName: "2"),
+                    calculatorButton(buttonName: "0"),
+                  ],
+                ),
+                Column(
+                  children: [
+                    calculatorButton(buttonName: "m-"),
+                    calculatorButton(buttonName: "/"),
+                    calculatorButton(buttonName: "9"),
+                    calculatorButton(buttonName: "6"),
+                    calculatorButton(buttonName: "3"),
+                    calculatorButton(buttonName: ","),
+                  ],
+                ),
+                Column(
+                  children: [
+                    calculatorButton(buttonName: "mr"),
+                    calculatorButton(buttonName: "*"),
+                    calculatorButton(buttonName: "-"),
+                    calculatorButton(buttonName: "+"),
+                    calculatorButton(buttonName: "="),
+                   // calculatorButton(buttonName: "%"),
+                  ],
+                ),
               ],
             )
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget calculatorButton({required String buttonName}) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        height: 50,
+        width: 50,
+        decoration: BoxDecoration(
+          color: Colors.grey,
+          borderRadius: BorderRadius.circular(6),
+        ),
+        child:  Center(
+          child: Text(
+            buttonName,
+            style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          ),
         ),
       ),
     );
