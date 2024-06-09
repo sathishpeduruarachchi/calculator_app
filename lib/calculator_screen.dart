@@ -12,30 +12,37 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 87, 37, 37),
+      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             const SizedBox(
-              height: 200,
+              height: 180,
             ),
-            const Text(
-              "125*20",
-              style: TextStyle(
-                  fontSize: 24,
-                  color: Colors.blueGrey,
-                  fontWeight: FontWeight.bold),
+            const Padding(
+              padding: EdgeInsets.only(right: 14, bottom: 20),
+              child: Text(
+                "125*20",
+                style: TextStyle(
+                    fontSize: 24,
+                    color: Colors.blueGrey,
+                    fontWeight: FontWeight.bold),
+              ),
             ),
-            const Text(
-              "2,500",
-              style: TextStyle(
-                  fontSize: 48,
-                  color: Colors.blueGrey,
-                  fontWeight: FontWeight.bold),
+            const Padding(
+              padding:  EdgeInsets.only(right: 10, bottom: 30),
+              child:  Text(
+                "2,500",
+                style: TextStyle(
+                    fontSize: 48,
+                    color: Colors.blueGrey,
+                    fontWeight: FontWeight.bold),
+              ),
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Column(
                   children: [
@@ -73,7 +80,10 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                     calculatorButton(buttonName: "*", isGreenButton: true),
                     calculatorButton(buttonName: "-", isGreenButton: true),
                     calculatorButton(buttonName: "+", isGreenButton: true),
-                    calculatorButton(buttonName: "=", isGreenButton: true),
+                    calculatorButton(
+                        buttonName: "=",
+                        isGreenButton: true,
+                        isEqualButton: true),
                     // calculatorButton(buttonName: "%"),
                   ],
                 ),
@@ -86,14 +96,16 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   }
 
   Widget calculatorButton(
-      {required String buttonName, bool isGreenButton = false}) {
+      {required String buttonName,
+      bool isGreenButton = false,
+      bool isEqualButton = false}) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        height: 50,
-        width: 50,
+        height: isEqualButton ? 116 : 50,
+        width: 70,
         decoration: BoxDecoration(
-          color: isGreenButton? Colors.green : Colors.grey,
+          color: isGreenButton ? Colors.green : Colors.grey,
           borderRadius: BorderRadius.circular(6),
         ),
         child: Center(
