@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-//import 'package:flutter/widgets.dart';
 
 class CalculatorScreen extends StatefulWidget {
   const CalculatorScreen({super.key});
@@ -10,6 +9,7 @@ class CalculatorScreen extends StatefulWidget {
 
 class _CalculatorScreenState extends State<CalculatorScreen> {
   String pressedValue = "0";
+  String calculationValue = "";
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +23,11 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
             const SizedBox(
               height: 180,
             ),
-            const Padding(
-              padding: EdgeInsets.only(right: 14, bottom: 20),
+            Padding(
+              padding: const EdgeInsets.only(right: 14, bottom: 20),
               child: Text(
-                "125*20",
-                style: TextStyle(
+                calculationValue,
+                style: const TextStyle(
                     fontSize: 24,
                     color: Colors.blueGrey,
                     fontWeight: FontWeight.bold),
@@ -73,7 +73,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                     calculatorButton(buttonName: "9"),
                     calculatorButton(buttonName: "6"),
                     calculatorButton(buttonName: "3"),
-                    calculatorButton(buttonName: ","),
+                    calculatorButton(buttonName: "."),
                   ],
                 ),
                 Column(
@@ -86,7 +86,6 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                         buttonName: "=",
                         isGreenButton: true,
                         isEqualButton: true),
-                    // calculatorButton(buttonName: "%"),
                   ],
                 ),
               ],
@@ -106,9 +105,54 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       child: InkWell(
         onTap: () {
           setState(() {
-            pressedValue = buttonName;
+            if (buttonName == "c") {
+              pressedValue = "0";
+              calculationValue = "";
+            } else if (buttonName != "+" &&
+                buttonName != "-" &&
+                buttonName != "*" &&
+                buttonName != "/" &&
+                buttonName != "=" &&
+                buttonName != "mc" &&
+                buttonName != "m+" &&
+                buttonName != "m-" &&
+                buttonName != "mr" &&
+                buttonName != "x" &&
+                buttonName != "%") {
+              if (pressedValue == "0") {
+                pressedValue = buttonName;
+              } else {
+                pressedValue += buttonName;
+              }
+            } else if (buttonName == "+" ||
+                buttonName == "-" ||
+                buttonName == "*" ||
+                buttonName == "/") {
+              calculationValue = pressedValue + buttonName;
+              pressedValue = "0";
+            } else if (buttonName == "=") {
+              double result = 0;
+              final double num1 = double.parse(calculationValue.substring(0, calculationValue.length - 1));
+              final double num2 = double.parse(pressedValue);
+
+              switch (calculationValue[calculationValue.length - 1]) {
+                case '+':
+                  result = num1 + num2;
+                  break;
+                case '-':
+                  result = num1 - num2;
+                  break;
+                case '*':
+                  result = num1 * num2;
+                  break;
+                case '/':
+                  result = num1 / num2;
+                  break;
+              }
+              pressedValue = result.toString();
+              calculationValue = "";
+            }
           });
-          print(pressedValue);
         },
         child: Container(
           height: isEqualButton ? 116 : 50,
